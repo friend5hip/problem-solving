@@ -5,7 +5,7 @@ public class Main {
         int ten = n / 10;
         int one = n % 10;
         int sum = ten + one;
-        if (sum % 2 == 0 && sum % 5 == 0) {
+        if (n % 2 == 0 && sum % 5 == 0) {
             return true;
         } else return false;
     }
