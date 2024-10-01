@@ -7,7 +7,7 @@ public class Main {
         int b = sc.nextInt();
 
         for (int i = a; i <= b; i++) {
-            if (1920 % i == 0 || 2880 % i == 0) {
+            if (1920 % i == 0 && 2880 % i == 0) {
                 System.out.println(1);
                 return;
             }
