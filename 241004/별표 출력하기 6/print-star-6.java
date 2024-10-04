@@ -5,6 +5,7 @@ public class Main {
         Scanner sc = new Scanner(System.in);
 
         int n = sc.nextInt();
+        // 위 삼각형
         for (int i = 0; i < n-1; i++) {
             for (int j = 0; j < i; j++) {
                 System.out.print("  ");
@@ -14,6 +15,7 @@ public class Main {
             }
             System.out.println();
         }
+        // 아래 삼각형
         for (int i = 1; i <= n; i++) {
             for (int j = 0; j < n-i; j++) {
                 System.out.print("  ");
