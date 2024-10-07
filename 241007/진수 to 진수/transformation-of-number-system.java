@@ -8,7 +8,7 @@ public class Main {
             int tmp = num % 10;
             decimal += tmp * digit;
             digit *= a;
-            num /= a;
+            num /= 10;
         }
         return decimal;
     }
