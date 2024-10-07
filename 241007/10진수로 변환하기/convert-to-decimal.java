@@ -3,20 +3,12 @@ import java.util.*;
 public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        
-        int binary = sc.nextInt();
-        ArrayList<Integer> binArr = new ArrayList<>();
-        while (binary >= 1) {
-            int tmp = binary % 10;
-            binArr.add(tmp);
-            binary /= 10;
-        }
 
-        int digit = 1;
+        String binary = sc.next();
+
         int decimal = 0;
-        for (int i = 0; i < binArr.size(); i++) {
-            decimal += binArr.get(i) * digit;
-            digit *= 2;
+        for (int i = 0; i < binary.length(); i++) {
+            decimal = decimal * 2 + (binary.charAt(i) - '0');
         }
         System.out.print(decimal);
     }
