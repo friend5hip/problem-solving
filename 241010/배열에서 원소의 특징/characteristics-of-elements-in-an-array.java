@@ -11,9 +11,9 @@ public class Main {
         }
         
         for (int i = 1; i <= 9; i++) {
-            if (arr[0] == 3) {
+            if (arr[0] % 3 == 0) {
                 System.out.print(arr[0]);
-            } else if (arr[i] == 3) {
+            } else if (arr[i] % 3 == 0) {
                 System.out.print(arr[i-1]);
                 continue;
             }
