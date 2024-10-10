@@ -18,9 +18,9 @@ public class Main {
         for(int i = 0; i < 3; i++) {
             char symptom = patients[i].charAt(0);
             int temperature = Integer.parseInt(patients[i].substring(2, 4));
-            if (symptom == 'Y' && temperature > 37) {
+            if (symptom == 'Y' && temperature >= 37) {
                 triageRoom[0]++;
-            } else if (symptom == 'N' && temperature > 37) {
+            } else if (symptom == 'N' && temperature >= 37) {
                 triageRoom[1]++;
             } else if (symptom == 'Y' && temperature < 37) {
                 triageRoom[2]++;
