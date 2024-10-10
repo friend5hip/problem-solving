@@ -28,13 +28,12 @@ public class Main {
                 triageRoom[3]++;
             }
         }
-        
+
         // 출력
         for (int j = 0; j < 4; j++) {
             System.out.print(triageRoom[j] + " ");
-            if (triageRoom[0] >= 2) {
-                System.out.print("E");
-            }
         }
+        if (triageRoom[0] >= 2)
+            System.out.print("E");
     }
 }
