@@ -6,13 +6,13 @@ import java.util.Set;
 public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        
+
         // 입력
         String[] patients = new String[3];
         for (int i = 0; i < 3; i++) {
             patients[i] = sc.nextLine();
         }
-        
+
         // 선별
         int[] triageRoom = new int[4];
         for(int i = 0; i < 3; i++) {
@@ -32,7 +32,7 @@ public class Main {
         // 출력
         for (int j = 0; j < 4; j++) {
             System.out.print(triageRoom[j] + " ");
-            if (triageRoom[0] > 2) {
+            if (triageRoom[0] >= 2) {
                 System.out.print("E");
             }
         }
