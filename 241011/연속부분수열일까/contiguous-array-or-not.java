@@ -20,9 +20,9 @@ public class Main {
             b[i] = tmp;
         }
 
-        // 정수 배열을 문자열로 변환
-        String aToStr = Arrays.toString(a).replaceAll("[^0-9]","");
-        String bToStr = Arrays.toString(b).replaceAll("[^0-9]","");
+        // 정수 배열을 문자열로 변환 (0 ~ 9이 아닐 경우 ""로 치환)
+        String aToStr = Arrays.toString(a).replaceAll("[^0-9]", "");
+        String bToStr = Arrays.toString(b).replaceAll("[^0-9]", "");
 
         // string이 substring을 포함하는지 확인
         if (aToStr.contains(bToStr)) {
