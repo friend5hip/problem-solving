@@ -24,6 +24,7 @@ public class Main {
         String aToStr = Arrays.toString(a).replaceAll("[^0-9]","");
         String bToStr = Arrays.toString(b).replaceAll("[^0-9]","");
 
+        // string이 substring을 포함하는지 확인
         if (aToStr.contains(bToStr)) {
             System.out.println("Yes");
         } else {
