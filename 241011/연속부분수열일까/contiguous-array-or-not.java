@@ -20,6 +20,7 @@ public class Main {
             b[i] = tmp;
         }
 
+        // 정수 배열을 문자열로 변환
         String aToStr = Arrays.toString(a).replaceAll("[^0-9]","");
         String bToStr = Arrays.toString(b).replaceAll("[^0-9]","");
 
