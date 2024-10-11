@@ -23,7 +23,7 @@ public class Main {
         String aToStr = Arrays.toString(a).replaceAll("[^0-9]","");
         String bToStr = Arrays.toString(b).replaceAll("[^0-9]","");
 
-        if (bToStr.contains(aToStr)) {
+        if (aToStr.contains(bToStr)) {
             System.out.println("Yes");
         } else {
             System.out.println("No");
