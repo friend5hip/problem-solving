@@ -13,14 +13,12 @@ public class Main {
         }
 
         int minVal = INT_MAX;
-        int cnt = 0;
+        int cnt = 1;
         for (int i = 0; i < n; i++) {
             if (minVal > arr[i]) {
                 minVal = arr[i];
-            }
-        }
-        for (int i = 0; i < n; i++) {
-            if (arr[i] == minVal) {
+                cnt = 1;
+            } else if (minVal == arr[i]) {
                 cnt++;
             }
         }
