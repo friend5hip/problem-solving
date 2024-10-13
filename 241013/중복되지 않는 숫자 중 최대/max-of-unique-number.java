@@ -9,7 +9,7 @@ public class Main {
         int n = sc.nextInt();
 
         ArrayList<Integer> arr = new ArrayList<>();
-        int[] isDup = new int[1000];
+        int[] isDup = new int[1001];
 
         for (int i = 0; i < n; i++) {
             int toBeAdded = sc.nextInt();
@@ -19,7 +19,7 @@ public class Main {
             arr.add(toBeAdded);
         }
 
-        for (int i = 0; i < 1000; i++) {
+        for (int i = 0; i < isDup.length; i++) {
             if (isDup[i] > 0) {
                 // 중복된 값 i가 있을 경우, arr에서 모든 i 값을 제거
                 while (arr.contains(i)) {
