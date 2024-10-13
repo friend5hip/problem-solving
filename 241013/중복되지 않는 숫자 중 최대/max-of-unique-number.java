@@ -9,7 +9,7 @@ public class Main {
         int n = sc.nextInt();
 
         ArrayList<Integer> arr = new ArrayList<>();
-        int[] isDup = new int[1001];
+        int[] isDup = new int[1001];    // 중복된 값을 카운트하기 위한 배열
 
         for (int i = 0; i < n; i++) {
             int toBeAdded = sc.nextInt();
@@ -27,7 +27,8 @@ public class Main {
                 }
             }
         }
-        
+
+        // 출력
         if (arr.isEmpty()) {
             System.out.print(-1);
         } else {
