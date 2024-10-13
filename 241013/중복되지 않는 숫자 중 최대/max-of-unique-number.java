@@ -27,6 +27,7 @@ public class Main {
                 }
             }
         }
+        
         if (arr.isEmpty()) {
             System.out.print(-1);
         } else {
