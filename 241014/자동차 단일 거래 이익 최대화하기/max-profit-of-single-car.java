@@ -12,17 +12,15 @@ public class Main {
             arr[i] = tmp;
         }
 
-        int currentProfit = 0;
+        int profit = 0;
         for (int i = 0; i < n; i++) {
-            for (int j = i; j < n; j++) {
-                if (arr[i] != arr[j]) {
-                    if (arr[j] - arr[i] > 0 && arr[j] - arr[i] > currentProfit) {
-                        currentProfit = arr[j] - arr[i];
-                    }
+            for (int j = i+1; j < n; j++) {
+                if (arr[j] - arr[i] > profit) {
+                    profit = Math.max(arr[j] - arr[i], profit);
                 }
             }
         }
 
-        System.out.println(currentProfit);
+        System.out.println(profit);
     }
 }
