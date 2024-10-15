@@ -5,7 +5,7 @@ public class Main {
         Scanner sc = new Scanner(System.in);
 
         int n = sc.nextInt();
-        int[][] map = new int[n][n];
+        int[][] map = new int[10][10];
 
         for (int i = 0; i < n; i++) {
             int num = i + 1;
