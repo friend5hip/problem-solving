@@ -11,19 +11,19 @@ public class Main {
         int n = Integer.parseInt(st.nextToken());
         int m = Integer.parseInt(st.nextToken());
 
-        int[][] grid = new int[n+1][n+1];
+        int[][] visited = new int[n][n];
         for (int i = 0; i < m; i++) {
             String t = br.readLine();
             StringTokenizer st2 = new StringTokenizer(t);
             int r = Integer.parseInt(st2.nextToken());
             int c = Integer.parseInt(st2.nextToken());
 
-            grid[r-1][c-1] = 1;
+            visited[r-1][c-1] = 1;
         }
 
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
-                System.out.print(grid[i][j] + " ");
+                System.out.print(visited[i][j] + " ");
             }
             System.out.println();
         }
