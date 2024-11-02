@@ -8,7 +8,7 @@ public class Main {
         String subStr = br.readLine();
 
         if (str.contains(subStr)) {
-            System.out.print(str.indexOf(subStr.charAt(0)));
+            System.out.print(str.indexOf(subStr));
         } else {
             System.out.print(-1);
         }
