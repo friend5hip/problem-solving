@@ -4,7 +4,7 @@ import java.io.InputStreamReader;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        // a, b를 입력받는다
+        // a, b를 입력받음
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         String a = br.readLine();
         String b = br.readLine();
