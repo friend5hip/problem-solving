@@ -4,6 +4,7 @@ public class Main {
     public static void main(String[] args) throws IOException {
         // 문자열 A, 명령 문자열 입력
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         String A = br.readLine();
         String command = br.readLine();
 
@@ -19,6 +20,8 @@ public class Main {
         }
 
         // 결과 출력
-        System.out.print(A);
+        bw.write(A + "\n");
+        bw.flush();
+        bw.close();
     }
 }
