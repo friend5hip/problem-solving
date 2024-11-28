@@ -8,9 +8,8 @@ public class Main {
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
         String input = br.readLine();
-        char[] chars = input.toCharArray();
-        int a = chars[0];
-        int b = chars[2];
+        int a = input.charAt(0);
+        int b = input.charAt(2);
 
         // 두 문자의 합과 차
         int sum = a + b;
