@@ -4,6 +4,7 @@ public class Main {
     public static void main(String[] args) throws IOException {
         // 문자열 1개, q개의 요청 입력
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         String input = br.readLine();
         String[] splitInput = input.split(" ");
         String string = splitInput[0];
@@ -31,8 +32,10 @@ public class Main {
                 default:
                     break;
             }
-            System.out.println(temporalString);
+            bw.write(temporalString + "\n");
             string = temporalString;
         }
+        bw.flush();
+        bw.close();
     }
 }
