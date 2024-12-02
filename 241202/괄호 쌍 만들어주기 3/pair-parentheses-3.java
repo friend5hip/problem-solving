@@ -6,11 +6,12 @@ public class Main {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         String A = br.readLine();
 
-        // 문자열의 모든 경우를 탐색해서 가지수를 카운트
+        // 문자열의 모든 경우를 탐색
         char[] AtoChar = A.toCharArray();
         int count = 0;
         for (int i = 0; i < AtoChar.length; i++) {
             for (int j = i+1; j < AtoChar.length; j++) {
+                // '('으로 시작하고 현재 괄호가 다를 경우 카운트
                 if (AtoChar[i] == '(' && AtoChar[i] != (AtoChar[j])) {
                     count++;
                 }
