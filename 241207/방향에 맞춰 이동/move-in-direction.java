@@ -4,34 +4,37 @@ import java.util.*;
 public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        
+
         // 이동 횟수 N
         int N = Integer.parseInt(br.readLine());
 
-        // N 만큼 이동
+        // N번 이동
         int x = 0, y = 0;
         for (int i = 0; i < N; i++) {
             String input = br.readLine();
-            StringTokenizer st = new StringTokenizer(input);
-            String direction = st.nextToken();
-            int distance = Integer.parseInt(st.nextToken());
+            String[] parts = input.split(" ");
+            // 방향, 이동 거리
+            char charDirection = parts[0].charAt(0); // 방향
+            int distance = Integer.parseInt(parts[1]); // 거리
 
-            int[] dx = new int[]{distance, 0, -distance, 0};
-            int[] dy = new int[]{0, -distance, 0, distance};
-            
-            switch (direction) {
-                case "E": x = x + dx[0]; y = y + dy[0];
-                    break;
-                case "W": x = x + dx[2]; y = y + dy[2];
-                    break;
-                case "S": x = x + dx[1]; y = y + dy[1];
-                    break;
-                case "N": x = x + dx[3]; y = y + dy[3];
-                    break;
-                default:
-                    break;
+            int[] dx = new int[]{1, -1, 0, 0};
+            int[] dy = new int[]{0, 0, -1, 1};
+
+            int direction = 0;
+            if (charDirection == 'E') {
+                direction = 0;
+            } else if (charDirection == 'W') {
+                direction = 1;
+            } else if (charDirection == 'S') {
+                direction = 2;
+            } else {
+                direction = 3;
             }
+
+            x += dx[direction] * distance;
+            y += dy[direction] * distance;
         }
+
         System.out.print(x + " " + y);
     }
 }
