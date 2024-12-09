@@ -29,16 +29,19 @@ public class Main {
 
             elapsedDays++;
 
-            // 만약 앞의 날짜가 앞선 날짜라면
+            // 만약 오른쪽 날짜가 앞선 날짜라면
             if (m1 > m2 || (m1 == m2 && d1 > d2)) {
                 d1--;
+                // 1일 보다 작아질 경우 전 달의 마지막 날짜로 갱신
                 if (d1 < 1) {
                     m1--;
                     d1 = endOfTheMonth[m1];
                 }
                 theDay = reversedDayOfTheWeek[elapsedDays % 7];
+            // 만약 왼쪽 날짜가 앞선 날짜라면
             } else if (m1 < m2 || (m1 == m2 && d1 < d2)) {
                 d1++;
+                // 해당 월의 마지막 날짜를 넘어가면 날짜를 1일로 갱신 
                 if (d1 > endOfTheMonth[m1]) {
                     m1++;
                     d1 = 1;
