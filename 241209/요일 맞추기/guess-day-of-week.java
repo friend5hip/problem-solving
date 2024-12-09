@@ -13,16 +13,21 @@ public class Main {
         int d2 = Integer.parseInt(st.nextToken());
 
         String[] dayOfTheWeek = {"Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"};
-        String[] reversedDayOfTheWeek = {"Sun", "Sat", "Fri", "Thu", "Wed", "Tue", "Mon"};
+        String[] reversedDayOfTheWeek = {"Mon", "Sun", "Sat", "Fri", "Thu", "Wed", "Tue"};
         int[] endOfTheMonth = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
         int elapsedDays = 0;
         String theDay = "";
         while (true) {
-            if (m1 == m2 && d1 == d2) {
+            // 같은 날짜일 경우 월요일을 출력하고 좌우 날짜가 동일해지면 반복문 탈출
+            if (m1 == m2 && d1 == d2 && elapsedDays == 0) {
                 theDay = dayOfTheWeek[0];
                 break;
+            } else if (m1 == m2 && d1 == d2) {
+                break;
             }
+
+            elapsedDays++;
 
             // 만약 앞의 날짜가 앞선 날짜라면
             if (m1 > m2 || (m1 == m2 && d1 > d2)) {
@@ -40,7 +45,6 @@ public class Main {
                 }
                 theDay = dayOfTheWeek[elapsedDays % 7];
             }
-            elapsedDays++;
         }
 
         System.out.println(theDay);
