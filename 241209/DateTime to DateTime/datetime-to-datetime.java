@@ -10,7 +10,7 @@ public class Main {
         int b = Integer.parseInt(st.nextToken());
         int c = Integer.parseInt(st.nextToken());
 
-        if (a < 11 || (b < 11 || c < 11)) {
+        if (a < 11 || (a == 11 && (b < 11 || c < 11))) {
             System.out.print(-1);
         } else {
             int elapsedMinute = 0;
