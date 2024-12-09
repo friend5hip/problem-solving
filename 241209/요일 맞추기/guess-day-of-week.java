@@ -20,6 +20,7 @@ public class Main {
         String theDay = "";
         while (true) {
             if (m1 == m2 && d1 == d2) {
+                theDay = dayOfTheWeek[0];
                 break;
             }
 
