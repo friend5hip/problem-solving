@@ -6,6 +6,8 @@ public class Main {
     static int[][] visited = new int[100][100];
     static int currentSafeAreaSize;
     static ArrayList<Integer> safeAreas;
+    static int[] dx = new int[]{-1, 0, 1, 0};
+    static int[] dy = new int[]{0, 1, 0, -1};
 
     public static void main(String[] args) throws IOException {
         // N x M 크기의 격자로 구성된 마을 입력
@@ -41,14 +43,11 @@ public class Main {
             }
             safeAreas.add(currentSafeAreaSize);
         }
-
+        // 안전 영역의 수가 최대가 될때의 k와 그 때의 안전 영역 수
         System.out.print(safeAreas.indexOf(Collections.max(safeAreas)) + 1 + " " + Collections.max(safeAreas));
     }
 
     static void DFS(int x, int y, int[][] map, int k) {
-        int[] dx = new int[]{-1, 0, 1, 0};
-        int[] dy = new int[]{0, 1, 0, -1};
-
         visited[x][y] = 1;
 
         for (int i = 0; i < 4; i++) {
