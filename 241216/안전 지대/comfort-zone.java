@@ -28,7 +28,6 @@ public class Main {
 
         // 마을 탐색
         for (int k = 1; k <= maxK; k++) {
-            System.out.println("현재 k: " + k);
             visited = new int[n][m];
             currentSafeAreaSize = 0;
             for (int i = 0; i < n; i++) {
