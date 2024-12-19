@@ -3,70 +3,76 @@ import java.util.*;
 
 public class Main {
     static int n, m;
-    static List<List<Edge>> graph;
-    static int[] dist;
-
-    static class Edge {
-        int to, weight;
-        Edge(int to, int weight) {
-            this.to = to;
-            this.weight = weight;
-        }
-    }
+    static int MAX_NUM = 100;
+    static int[][] grid = new int[MAX_NUM][MAX_NUM];
+    static int[][] visited = new int[MAX_NUM][MAX_NUM];
+    static int[] dx = new int[]{-1, 0, 1, 0};
+    static int[] dy = new int[]{0, 1, 0, -1};
+    static Queue<Pair> q = new LinkedList<>();
+    static boolean canEscape = false;
 
     public static void main(String[] args) throws IOException {
+        // n * m의 격자 입력
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
         n = Integer.parseInt(st.nextToken());
         m = Integer.parseInt(st.nextToken());
 
-        graph = new ArrayList<>();
-        for (int i = 0; i < n * m; i++) {
-            graph.add(new ArrayList<>());
-        }
-
         for (int i = 0; i < n; i++) {
-            st = new StringTokenizer(br.readLine());
+            StringTokenizer st2 = new StringTokenizer(br.readLine());
             for (int j = 0; j < m; j++) {
-                int value = Integer.parseInt(st.nextToken());
-                if (value == 1) {
-                    int current = i * m + j;
-                    if (j < m - 1) graph.get(current).add(new Edge(current + 1, 0));
-                    if (i < n - 1) graph.get(current).add(new Edge(current + m, 0));
-                    if (j > 0) graph.get(current).add(new Edge(current - 1, 1));
-                    if (i > 0) graph.get(current).add(new Edge(current - m, 1));
-                }
+                grid[i][j] = Integer.parseInt(st2.nextToken());
             }
         }
 
-        System.out.println(bfs01(0, n * m - 1) ? 1 : 0);
+        // 좌측 상단부터 시작
+        push(0, 0);
+        // 너비 우선 검색
+        BFS();
+
+        System.out.println(canEscape ? 1 : 0);
     }
 
-    static boolean bfs01(int start, int end) {
-        dist = new int[n * m];
-        Arrays.fill(dist, Integer.MAX_VALUE);
-        dist[start] = 0;
+    static void BFS() {
+        // 탐색 가능한 칸이 있을 경우 반복
+        while (!q.isEmpty()) {
+            // 현재 탐색 위치
+            Pair curr = q.poll();
+            int x = curr.x, y = curr.y;
+            // 우측 하단 도달 시 탈출 처리
+            if (x == n-1 && y == m-1) {
+                canEscape = true;
+            }
 
-        Deque<Integer> deque = new ArrayDeque<>();
-        deque.offerFirst(start);
-
-        while (!deque.isEmpty()) {
-            int current = deque.pollFirst();
-            if (current == end) return true;
-
-            for (Edge edge : graph.get(current)) {
-                int next = edge.to;
-                int newDist = dist[current] + edge.weight;
-                if (newDist < dist[next]) {
-                    dist[next] = newDist;
-                    if (edge.weight == 0) {
-                        deque.offerFirst(next);
-                    } else {
-                        deque.offerLast(next);
-                    }
+            for (int i = 0; i < 4; i++) {
+                int nx = x + dx[i];
+                int ny = y + dy[i];
+                // 격자 범위 안에서 방문한 적이 없고, 격자가 1일 경우 탐색 가능
+                if (possible(nx, ny)) {
+                    push(nx, ny);
                 }
             }
         }
-        return false;
+    }
+
+    static void push(int x, int y) {
+        visited[x][y] = 1;
+        q.offer(new Pair(x, y));
+    }
+
+    static boolean possible(int x, int y) {
+        return inRange(x, y) && visited[x][y] == 0 && grid[x][y] == 1;
+    }
+
+    static boolean inRange(int x, int y) {
+        return 0 <= x && x < n && 0 <= y && y < m;
+    }
+}
+
+class Pair {
+    int x, y;
+    public Pair(int x, int y) {
+        this.x = x;
+        this.y = y;
     }
 }
