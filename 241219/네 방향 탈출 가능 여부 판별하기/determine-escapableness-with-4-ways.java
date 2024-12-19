@@ -6,8 +6,8 @@ public class Main {
     static int MAX_NUM = 100;
     static int[][] grid = new int[MAX_NUM][MAX_NUM];
     static int[][] visited = new int[MAX_NUM][MAX_NUM];
-    static int[] dx = new int[]{1, 0};
-    static int[] dy = new int[]{0 ,1};
+    static int[] dx = new int[]{-1, 0, 1, 0};
+    static int[] dy = new int[]{0, 1, 0, -1};
     static Queue<Pair> q = new LinkedList<>();
     static boolean canEscape = false;
 
@@ -30,11 +30,7 @@ public class Main {
         // 너비 우선 검색
         BFS();
 
-        if (canEscape) {
-            System.out.println(1);
-        } else {
-            System.out.println(0);
-        }
+        System.out.println(canEscape ? 1 : 0);
     }
 
     static void BFS() {
@@ -48,7 +44,7 @@ public class Main {
                 canEscape = true;
             }
 
-            for (int i = 0; i < 2; i++) {
+            for (int i = 0; i < 4; i++) {
                 int nx = x + dx[i];
                 int ny = y + dy[i];
                 // 격자 범위 안에서 방문한 적이 없고, 격자가 1일 경우 탐색 가능
