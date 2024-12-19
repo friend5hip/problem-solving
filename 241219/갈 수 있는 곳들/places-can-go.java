@@ -1,14 +1,6 @@
 import java.io.*;
 import java.util.*;
 
-class Point {
-    int x, y;
-    public Point(int x, int y) {
-        this.x = x;
-        this.y = y;
-    }
-}
-
 public class Main {
     static int n;
     static int k;
@@ -51,15 +43,18 @@ public class Main {
             int[] curr = q.poll();
             int r = curr[0], c = curr[1];
 
+            // 방문 여부 체크
             if (visited[r][c] == 1) continue;
             visited[r][c] = 1;
 
+            // 0이면 방문 가능한 칸으로 카운트
             if (grid[r][c] == 0) {
                 count++;
             } else {
                 continue;
             }
 
+            // 방문 가능 여부 체크 후 방문
             for (int i = 0; i < 4; i++) {
                 int nr = r + dx[i];
                 int nc = c + dy[i];
