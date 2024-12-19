@@ -3,76 +3,53 @@ import java.util.*;
 
 public class Main {
     static int n, m;
-    static int MAX_NUM = 100;
-    static int[][] grid = new int[MAX_NUM][MAX_NUM];
-    static int[][] visited = new int[MAX_NUM][MAX_NUM];
-    static int[] dx = new int[]{-1, 0, 1, 0};
-    static int[] dy = new int[]{0, 1, 0, -1};
-    static Queue<Pair> q = new LinkedList<>();
-    static boolean canEscape = false;
+    static int[][] grid;
+    static boolean[][] visited;
+    static int[] dx = {-1, 1, 0, 0};
+    static int[] dy = {0, 0, -1, 1};
 
     public static void main(String[] args) throws IOException {
-        // n * m의 격자 입력
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
         n = Integer.parseInt(st.nextToken());
         m = Integer.parseInt(st.nextToken());
 
+        grid = new int[n][m];
+        visited = new boolean[n][m];
+
         for (int i = 0; i < n; i++) {
-            StringTokenizer st2 = new StringTokenizer(br.readLine());
+            st = new StringTokenizer(br.readLine());
             for (int j = 0; j < m; j++) {
-                grid[i][j] = Integer.parseInt(st2.nextToken());
+                grid[i][j] = Integer.parseInt(st.nextToken());
             }
         }
 
-        // 좌측 상단부터 시작
-        push(0, 0);
-        // 너비 우선 검색
-        BFS();
-
-        System.out.println(canEscape ? 1 : 0);
+        System.out.println(bfs() ? 1 : 0);
     }
 
-    static void BFS() {
-        // 탐색 가능한 칸이 있을 경우 반복
-        while (!q.isEmpty()) {
-            // 현재 탐색 위치
-            Pair curr = q.poll();
-            int x = curr.x, y = curr.y;
-            // 우측 하단 도달 시 탈출 처리
-            if (x == n-1 && y == m-1) {
-                canEscape = true;
-            }
+    static boolean bfs() {
+        Queue<int[]> queue = new LinkedList<>();
+        queue.offer(new int[]{0, 0});
+        visited[0][0] = true;
 
-            for (int i = 0; i < 4; i++) {
-                int nx = x + dx[i];
-                int ny = y + dy[i];
-                // 격자 범위 안에서 방문한 적이 없고, 격자가 1일 경우 탐색 가능
-                if (possible(nx, ny)) {
-                    push(nx, ny);
+        while (!queue.isEmpty()) {
+            int[] curr = queue.poll();
+            int x = curr[0], y = curr[1];
+
+            if (x == n - 1 && y == m - 1) return true;
+
+            for (int i = 0; i < 4; i++) {  // 4방향 탐색
+                int nx = x + dx[i], ny = y + dy[i];
+                if (isValid(nx, ny)) {
+                    visited[nx][ny] = true;
+                    queue.offer(new int[]{nx, ny});
                 }
             }
         }
+        return false;
     }
 
-    static void push(int x, int y) {
-        visited[x][y] = 1;
-        q.offer(new Pair(x, y));
-    }
-
-    static boolean possible(int x, int y) {
-        return inRange(x, y) && visited[x][y] == 0 && grid[x][y] == 1;
-    }
-
-    static boolean inRange(int x, int y) {
-        return 0 <= x && x < n && 0 <= y && y < m;
-    }
-}
-
-class Pair {
-    int x, y;
-    public Pair(int x, int y) {
-        this.x = x;
-        this.y = y;
+    static boolean isValid(int x, int y) {
+        return x >= 0 && x < n && y >= 0 && y < m && !visited[x][y] && grid[x][y] == 1;
     }
 }
