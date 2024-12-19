@@ -57,7 +57,7 @@ public class Main {
 
     static void push(int x, int y) {
         visited[x][y] = 1;
-        q.add(new Pair(x, y));
+        q.offer(new Pair(x, y));
     }
 
     static boolean possible(int x, int y) {
