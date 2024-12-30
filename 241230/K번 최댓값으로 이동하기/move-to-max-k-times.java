@@ -1,3 +1,4 @@
+import java.sql.SQLOutput;
 import java.util.*;
 import java.io.*;
 
@@ -30,7 +31,7 @@ public class Main {
             }
         }
 
-        // 시작 위치 입력
+        // 탐색 시작 위치 입력
         StringTokenizer st3 = new StringTokenizer(br.readLine());
         int r = Integer.parseInt(st3.nextToken()) - 1;
         int c = Integer.parseInt(st3.nextToken()) - 1;
@@ -38,7 +39,7 @@ public class Main {
         // k번 반복
         for (int l = 0; l < k; l++) {
             int[] next = BFS(r, c);
-
+            
             // 더 이상 이동할 수 없으면 종료
             if (next[0] == -1 && next[1] == -1) break;
 
@@ -51,11 +52,14 @@ public class Main {
     }
 
     static int[] BFS(int startR, int startC) {
+        // 방문 배열 초기화
         for (int i = 0; i < n; i++) {
             Arrays.fill(visited[i], false);
         }
+        // 큐 초기화
         q.clear();
 
+        // 초기값
         int currVal = grid[startR][startC];
         int maxVal = -1;
         int nextR = -1, nextC = -1;
@@ -72,12 +76,17 @@ public class Main {
                 int nr = r + dx[i];
                 int nc = c + dy[i];
 
+                // 유효하지 않은 전진이면 continue
                 if (nr < 0 || nr >= n || nc < 0 || nc >= n) continue;
+                // 방문했거나 현재 칸보다 크거나 같은 값이면 continue
                 if (visited[nr][nc] || grid[nr][nc] >= currVal) continue;
 
                 visited[nr][nc] = true;
                 q.offer(new int[]{nr, nc});
 
+                // 방문할 수 있는 칸 중 제일 크거나
+                // 최댓값이 동일한 칸 중 제일 작은 행으로
+                // 같은 행일 경우 제일 작은 열의 칸으로 이동
                 if (grid[nr][nc] > maxVal ||
                         (grid[nr][nc] == maxVal && nr < nextR) ||
                         (grid[nr][nc] == maxVal && nr == nextR && nc < nextC)) {
