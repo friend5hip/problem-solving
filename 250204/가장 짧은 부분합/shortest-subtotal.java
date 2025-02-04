@@ -27,7 +27,7 @@ public class Main {
                 j++;
             }
 
-            minLength = Math.min(minLength, j - i + 1) + 1;
+            minLength = Math.min(minLength, (j+1) - i + 1);
 
             sum -= sequence[i];
         }
