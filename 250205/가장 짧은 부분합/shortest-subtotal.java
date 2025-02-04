@@ -24,7 +24,8 @@ public class Main {
         // 두 개의 포인터로 합을 계산
         for (int i = 1; i <= n; i++) {
             // 첫번째 포인터가 s보다 작은 경우 다음 포인터로 전진
-            if (sequence[i] < s) {
+            if (sequence[i] > s) {
+                minLength = Math.min(minLength, (j+1) - i + 1);
                 break;
             }
             // 더할 숫자가 남아 있고, 현재까지 합과 다음 숫자의 합이 s보다 크지 않을 경우
