@@ -7,7 +7,6 @@ public class Main {
     static int t, n, x, y;
     static int[] home, festival;
     static List<int[]> convenients;
-    static Set<String> visited;
     static Queue<int[]> q;
 
     public static void main(String[] args) throws IOException {
@@ -18,7 +17,6 @@ public class Main {
         for (int i = 0; i < t; i++) {
             n = Integer.parseInt(br.readLine());
             convenients = new ArrayList<>();
-            visited = new HashSet<>();
             q = new LinkedList<>();
 
             StringTokenizer st = new StringTokenizer(br.readLine());
@@ -39,7 +37,6 @@ public class Main {
             festival = new int[]{x, y};
 
             q.add(home);
-            visited.add(home[0] + "," + home[1]);
             sb.append(bfs() ? "happy\n" : "sad\n");
         }
 
@@ -55,11 +52,13 @@ public class Main {
                 return true;
             }
 
-            for (int[] next : convenients) {
-                String key = next[0] + "," + next[1];
-                if (!visited.contains(key) && canReach(x, y, next[0], next[1])) {
-                    visited.add(key);
+            Iterator<int[]> iter = convenients.iterator();
+            while (iter.hasNext()) {
+                int[] next = iter.next();
+
+                if (canReach(x, y, next[0], next[1])) {
                     q.add(next);
+                    iter.remove();
                 }
             }
         }
