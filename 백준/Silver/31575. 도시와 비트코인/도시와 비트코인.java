@@ -43,7 +43,7 @@ public class Main {
             for (int i = 0; i < 2; i++) {
                 int nx = x + dx[i];
                 int ny = y + dy[i];
-                // 격자 범위 내의 방문 중이지 않은, 방문 가능한 위치일 경우, 탐색
+                // 격자 범위 내의 방문하지 않았던, 방문 가능한 위치(1)일 경우, 탐색
                 if (nx > 0 && ny > 0 && nx <= m && ny <= n && visited[nx][ny] == 0 && grid[nx][ny] == 1) {
                     visited[nx][ny] = 1;
                     queue.add(new int[]{nx, ny});
