@@ -4,8 +4,7 @@ import java.util.*;
 public class Main {
     static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     static int f, s, g, u, d;
-    static boolean[] visited;
-    static int[] count;
+    static int[] visited;
     static boolean flag;
 
     public static void main(String[] args) throws IOException {
@@ -17,18 +16,16 @@ public class Main {
         u = Integer.parseInt(st.nextToken());
         d = Integer.parseInt(st.nextToken());
 
-        visited = new boolean[f+1];
-        count = new int[f+1];
-
+        visited = new int[f+1];
+        Arrays.fill(visited, -1);
         bfs(s, g);
-        System.out.println(flag? count[g] : "use the stairs");
+        System.out.println(flag? visited[g] : "use the stairs");
     }
 
     public static void bfs(int start, int target) {
         Queue<Integer> q = new LinkedList<>();
-        visited[start] = true;
+        visited[start] = 0;
         q.add(start);
-        count[start] = 0;
         while (!q.isEmpty()) {
             int currentFloor = q.poll();
 
@@ -41,10 +38,9 @@ public class Main {
             for (int nextFloor : nextFloors) {
                 if (nextFloor < 1 || nextFloor > f) continue;
 
-                if (!visited[nextFloor]) {
-                    visited[nextFloor] = true;
+                if (visited[nextFloor] == -1) {
                     q.add(nextFloor);
-                    count[nextFloor] = count[currentFloor] + 1;
+                    visited[nextFloor] = visited[currentFloor] + 1;
                 }
             }
         }
