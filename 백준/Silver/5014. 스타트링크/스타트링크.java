@@ -6,6 +6,7 @@ public class Main {
     static int f, s, g, u, d;
     static int[] visited;
     static boolean flag;
+    static int[] dy;
 
     public static void main(String[] args) throws IOException {
         StringTokenizer st = new StringTokenizer(br.readLine());
@@ -17,13 +18,14 @@ public class Main {
         d = Integer.parseInt(st.nextToken());
 
         visited = new int[f+1];
+        dy = new int[]{u, -d};
         Arrays.fill(visited, -1);
         bfs(s, g);
         System.out.println(flag? visited[g] : "use the stairs");
     }
 
     public static void bfs(int start, int target) {
-        Queue<Integer> q = new LinkedList<>();
+        Deque<Integer> q = new ArrayDeque<>();
         visited[start] = 0;
         q.add(start);
         while (!q.isEmpty()) {
@@ -34,10 +36,9 @@ public class Main {
                 return;
             }
 
-            int[] nextFloors = {currentFloor + u, currentFloor - d};
-            for (int nextFloor : nextFloors) {
+            for (int i = 0; i < 2; i++) {
+                int nextFloor = currentFloor + dy[i];
                 if (nextFloor < 1 || nextFloor > f) continue;
-
                 if (visited[nextFloor] == -1) {
                     q.add(nextFloor);
                     visited[nextFloor] = visited[currentFloor] + 1;
