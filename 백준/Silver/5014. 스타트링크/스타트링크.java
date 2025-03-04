@@ -17,8 +17,8 @@ public class Main {
         u = Integer.parseInt(st.nextToken());
         d = Integer.parseInt(st.nextToken());
 
-        visited = new boolean[1000001];
-        count = new int[1000001];
+        visited = new boolean[f+1];
+        count = new int[f+1];
 
         bfs(s, g);
         System.out.println(flag? count[g] : "use the stairs");
@@ -32,7 +32,10 @@ public class Main {
         while (!q.isEmpty()) {
             int currentFloor = q.poll();
 
-            if (currentFloor == target) flag = true;
+            if (currentFloor == target) {
+                flag = true;
+                return;
+            }
 
             int[] nextFloors = {currentFloor + u, currentFloor - d};
             for (int nextFloor : nextFloors) {
