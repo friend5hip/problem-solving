@@ -26,7 +26,7 @@ public class Main {
         }
 
         visited = new boolean[n][m];
-        queue = new LinkedList<>();
+        queue = new ArrayDeque<>();
         for (int r = 0; r < n; r++) {
             for (int c = 0; c < m; c++) {
                 if (grid[r][c] == 1) {
@@ -60,9 +60,7 @@ public class Main {
         for (int r = 0; r < n; r++) {
             for (int c = 0; c < m; c++) {
                 if (grid[r][c] == 0) {
-                    bw.write("-1\n");
-                    bw.flush();
-                    bw.close();
+                    System.out.println(-1);
                     return;
                 }
                 maxDays = Math.max(maxDays, grid[r][c]);
