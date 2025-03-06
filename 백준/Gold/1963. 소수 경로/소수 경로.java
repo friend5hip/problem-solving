@@ -4,9 +4,19 @@ import java.util.*;
 public class Main {
     static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     static StringTokenizer st;
+    static boolean[] composites;
 
     public static void main(String[] args) throws IOException {
         int t = Integer.parseInt(br.readLine());
+        // 소수 판별 (에라토스테네스의 체)
+        composites = new boolean[10000];
+        for (int i = 2; i < 10000; i++) {
+            if (!composites[i]) {
+                for (int j = i * i; j < 10000; j += i) {
+                    composites[j] = true; // false면 소수
+                }
+            }
+        }
 
         for (int i = 0; i < t; i++) {
             st = new StringTokenizer(br.readLine());
@@ -39,7 +49,7 @@ public class Main {
                     if (j == Character.getNumericValue(numToStr.charAt(i))) continue; // 같은 숫자일 경우
 
                     int nextNumber = Integer.parseInt(prefix + j + suffix);
-                    if (isPrime(nextNumber) && !visited.containsKey(nextNumber)) {
+                    if (!composites[nextNumber] && !visited.containsKey(nextNumber)) {
                         visited.put(nextNumber, visited.get(currentNumber) + 1);
                         queue.add(nextNumber);
                     }
@@ -47,13 +57,5 @@ public class Main {
             }
         }
         return "Impossible";
-    }
-
-    public static boolean isPrime(int num) {
-        if (num < 2) return false;
-        for (int i = 2; i <= Math.sqrt(num); i++) {
-            if (num % i == 0) return false;
-        }
-        return true;
     }
 }
