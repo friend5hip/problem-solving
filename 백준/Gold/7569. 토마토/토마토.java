@@ -8,9 +8,9 @@ public class Main {
     static int[][][] boxes;
     static boolean[][][] visited;
     static Queue<int[]> queue;
-    static int[] dx = new int[]{1, -1, 0, 0};
-    static int[] dy = new int[]{0, 0, -1, 1};
-    static int[] dz = new int[]{-1, 1};
+    static int[] dx = new int[]{0, 0, 1, -1, 0, 0};
+    static int[] dy = new int[]{0, 0, 0, 0, -1, 1};
+    static int[] dz = new int[]{1, -1, 0, 0, 0, 0};
 
     public static void main(String[] args) throws IOException {
         st = new StringTokenizer(br.readLine());
@@ -55,26 +55,16 @@ public class Main {
                 int currR = curr[1];
                 int currC = curr[2];
 
-                for (int i = 0; i < 2; i++) {
+                for (int i = 0; i < 6; i++) {
                     int newH = currH + dz[i];
-                    if (newH >= 0 && newH < h
-                            && !visited[newH][currR][currC]
-                            && boxes[newH][currR][currC] == 0) {
-                        visited[newH][currR][currC] = true;
-                        boxes[newH][currR][currC] = 1;
-                        queue.add(new int[]{newH, currR, currC});
-                    }
-                }
-
-                for (int i = 0; i < 4; i++) {
                     int newR = currR + dx[i];
                     int newC = currC + dy[i];
-                    if (newR >= 0 && newC >= 0 && newR < n && newC < m
-                            && !visited[currH][newR][newC]
-                            && boxes[currH][newR][newC] == 0) {
-                        visited[currH][newR][newC] = true;
-                        boxes[currH][newR][newC] = 1;
-                        queue.add(new int[]{currH, newR, newC});
+                    if (newR >= 0 && newC >= 0 && newR < n && newC < m && newH >= 0 && newH < h
+                            && !visited[newH][newR][newC]
+                            && boxes[newH][newR][newC] == 0) {
+                        visited[newH][newR][newC] = true;
+                        boxes[newH][newR][newC] = 1;
+                        queue.add(new int[]{newH, newR, newC});
                     }
                 }
             }
