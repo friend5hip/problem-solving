@@ -10,12 +10,11 @@ public class Main {
         int[] cost = new int[n+1];
         int[] value = new int[n+1];
         StringTokenizer st = new StringTokenizer(br.readLine());
+        StringTokenizer st2 = new StringTokenizer(br.readLine());
+
         for (int i = 1; i <= n; i++) {
             cost[i] = Integer.parseInt(st.nextToken());
-        }
-        st = new StringTokenizer(br.readLine());
-        for (int i = 1; i <= n; i++) {
-            value[i] = Integer.parseInt(st.nextToken());
+            value[i] = Integer.parseInt(st2.nextToken());
         }
 
         int health = 100;
