@@ -11,18 +11,20 @@ public class Main {
         System.out.println(count);
     }
 
-    static void dfs(int length) {
-        if (length == n) {
+    static void dfs(int digits) {
+        if (digits == n) {
             count++;
             return;
         }
-        if (length > n) return;
+        if (digits > n) return;
 
         for (int i = 1; i <= 4; i++) {
-            if (length + i > n) continue;
-            for (int j = 0; j < i; j++) seq.add(i); // i를 i번 추가
-            dfs(length + i);
-            for (int j = 0; j < i; j++) seq.remove(seq.size() - 1); // 되돌리기
+            if (digits + i > n) continue; // 현재 숫자를 붙였을 때, 아름다운 수가 될 가능성이 없으면 continue
+            for (int j = 0; j < i; j++) seq.add(i); // 현재 숫자를 현재 숫자만큼 붙임
+            dfs(digits + i);
+            for (int j = 0; j < i; j++) {
+                seq.remove(seq.size() - 1); // 되돌리기
+            }
         }
     }
 }
