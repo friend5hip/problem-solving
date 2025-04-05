@@ -8,9 +8,8 @@ public class Main {
 
         int[] answer = new int[26];
         Arrays.fill(answer, -1);
-        char[] chars = word.toCharArray();
         for (int i = 0; i < word.length(); i++) {
-            int index = chars[i] - 'a';
+            int index = word.charAt(i) - 'a';
             if (answer[index] == -1) {
                 answer[index] += (i+1);
             }
