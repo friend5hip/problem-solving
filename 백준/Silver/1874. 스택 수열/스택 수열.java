@@ -1,5 +1,7 @@
-import java.util.*;
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.Stack;
 
 public class Main {
     static int n;
@@ -18,22 +20,20 @@ public class Main {
         Stack<Integer> stack = new Stack<>();
         int targetIndex = 0;
         int pushNum = 1;
-        while (targetIndex < sequence.length) {
+        while (targetIndex < n) {
             int target = sequence[targetIndex];
-            while (true) {
-                if (!stack.isEmpty() && stack.peek() == target) {
-                    stack.pop(); sb.append("-\n");
-                    break;
-                } else {
-                    if (pushNum > n) {
-                        System.out.println("NO");
-                        return;
-                    }
-                    stack.push(pushNum); sb.append("+\n");
-                    pushNum++;
+            if (!stack.isEmpty() && stack.peek() == target) {
+                stack.pop();
+                sb.append("-\n");
+                targetIndex++;
+            } else {
+                if (pushNum > n) {
+                    System.out.println("NO");
+                    return;
                 }
+                stack.push(pushNum++);
+                sb.append("+\n");
             }
-            targetIndex++;
         }
 
         System.out.println(sb);
