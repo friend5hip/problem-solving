@@ -6,14 +6,14 @@ class Main {
 
     public static void main(String[] args) throws IOException {
         String str = br.readLine();
-        Map<String, Integer> map = new TreeMap<>();
+        Set<String> set = new HashSet<>();
         for (int i = 0; i < str.length(); i++) {
             StringBuilder temp = new StringBuilder();
             for (int j = i; j < str.length(); j++) {
                 temp.append(str.charAt(j));
-                map.put(String.valueOf(temp), map.getOrDefault(String.valueOf(temp), 0) + 1);
+                set.add(String.valueOf(temp));
             }
         }
-        System.out.println(map.size());
+        System.out.println(set.size());
     }
 }
