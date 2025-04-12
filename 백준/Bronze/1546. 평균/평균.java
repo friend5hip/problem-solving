@@ -7,17 +7,16 @@ class Main {
     public static void main(String[] args) throws IOException {
         int n = Integer.parseInt(br.readLine());
         StringTokenizer st = new StringTokenizer(br.readLine());
-        List<Integer> sequence = new ArrayList<>();
+        int[] scores = new int[n];
+        int max = 0;
         for (int i = 0; i < n; i++) {
-            sequence.add(Integer.parseInt(st.nextToken()));
+            scores[i] = Integer.parseInt(st.nextToken());
+            if (scores[i] > max) max = scores[i];
         }
-        sequence.sort((a, b) -> b - a);
-        double maxNum = sequence.get(0);
         double sum = 0;
-        for (int num : sequence) {
-            double newNum = ((double) num / maxNum) * 100;
-            sum += newNum;
+        for (int score : scores) {
+            sum += (double) score / max * 100;
         }
-        System.out.println(sum / sequence.size());
+        System.out.println(sum / n);
     }
 }
