@@ -7,9 +7,9 @@ public class Main {
 
         for (int i = 0; i < 3; i++) {
             StringTokenizer st = new StringTokenizer(br.readLine());
+            
             String str1 = st.nextToken().replace(":", " ");
             StringTokenizer st1 = new StringTokenizer(str1);
-
             int[] startTime = new int[3];
             startTime[0] = Integer.parseInt(st1.nextToken());
             startTime[1] = Integer.parseInt(st1.nextToken());
