@@ -60,8 +60,6 @@ class Solution {
             }
         }
         
-        int answer = Integer.parseInt(sb.toString());
-        
-        return answer;
+        return Integer.parseInt(sb.toString());
     }
 }
