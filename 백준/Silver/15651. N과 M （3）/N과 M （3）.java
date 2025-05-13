@@ -7,14 +7,12 @@ public class Main {
     static List<Integer> answer = new ArrayList<>();
     static StringBuilder sb = new StringBuilder();
     static int n, m;
-    static boolean[] visited;
 
     public static void main(String[] args) throws IOException {
         st = new StringTokenizer(br.readLine());
         n = Integer.parseInt(st.nextToken());
         m = Integer.parseInt(st.nextToken());
 
-        visited = new boolean[n + 1];
         backtracking(0);
 
         System.out.println(sb);
@@ -34,6 +32,5 @@ public class Main {
             backtracking(depth + 1);
             answer.remove(answer.size() - 1);
         }
-
     }
 }
