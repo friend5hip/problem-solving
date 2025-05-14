@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
 
-
 public class Main {
     static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     static StringTokenizer st;
@@ -16,7 +15,7 @@ public class Main {
         int k = Integer.parseInt(st.nextToken());
         int m = Integer.parseInt(st.nextToken());
 
-        long right = 0;
+        // N개의 김밥을 양쪽에서 k만큼 잘라낸다. (2k만큼 자를 수 없으면 k만큼만 잘라내고 k보다 짧으면 폐기
         List<Integer> gimbaps = new ArrayList<>();
         for (int i = 0; i < n; i++) {
             int gimbap = Integer.parseInt(br.readLine());
@@ -29,14 +28,14 @@ public class Main {
             }
             gimbaps.add(gimbap);
         }
-
+				
+				long right = 0;
         for (int gimbap : gimbaps) {
            right = Math.max(right, gimbap);
         }
-
-        // N개의 김밥을 양쪽에서 k만큼 잘라낸다. (2k 만큼 자를 수 없으면 k만큼만 잘라내고 k보다 짧으면 폐기)
+        
         // 모두 P 길이로 일정하게 잘라낸다.
-        // P 길이로 잘라낸 M개의 조각이 최소가 되는 P를 구한다.
+        // P 길이로 잘라낸 m개의 조각이 최소가 되는 P를 구한다.
         long left = 1;
         long answer = 0;
         while (left <= right) {
@@ -48,7 +47,7 @@ public class Main {
                     count += gimbaps.get(i) / mid;
                 }
             }
-            // m보다 적게 잘리면
+            // m개보다 많이 잘리면, 더 길게 자를 수 있는지 체크
             if (count >= m) {
                 left = mid + 1;
                 answer = mid;
