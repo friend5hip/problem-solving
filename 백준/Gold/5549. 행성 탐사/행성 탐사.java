@@ -33,7 +33,7 @@ public class Main {
                 int isJ = info == 'J' ? 1 : 0;
                 int isO = info == 'O' ? 1 : 0;
                 int isI = info == 'I' ? 1 : 0;
-                // 현재 좌표에서 위쪽, 왼쪽을 더하고 중복으로 더한 좌상단 값을 빼준다.
+                // 현재 좌표에서 위쪽 누적 합, 왼쪽 누적 합을 더하고 중복으로 더한 좌상단 값을 빼준다.
                 accSumJ[i][j] = accSumJ[i-1][j] + accSumJ[i][j-1] - accSumJ[i-1][j-1] + isJ;
                 accSumO[i][j] = accSumO[i-1][j] + accSumO[i][j-1] - accSumO[i-1][j-1] + isO;
                 accSumI[i][j] = accSumI[i-1][j] + accSumI[i][j-1] - accSumI[i-1][j-1] + isI;
@@ -50,8 +50,7 @@ public class Main {
             int oCount = accSumO[c][d] - accSumO[a-1][d] - accSumO[c][b-1] + accSumO[a-1][b-1];
             int iCount = accSumI[c][d] - accSumI[a-1][d] - accSumI[c][b-1] + accSumI[a-1][b-1];
 
-            sb.append(jCount + " " + oCount + " " + iCount);
-            sb.append("\n");
+            sb.append(jCount).append(" ").append(oCount).append(" ").append(iCount).append("\n");
         }
 
         System.out.println(sb);
