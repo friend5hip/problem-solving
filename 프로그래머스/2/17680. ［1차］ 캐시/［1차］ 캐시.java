@@ -4,9 +4,10 @@ class Solution {
     public int solution(int cacheSize, String[] cities) {
         int executionTime = 0;
         
+        if (cacheSize == 0) return cities.length * 5;
+        
         List<String> cache = new ArrayList<>();
         for (int i = 0; i < cities.length; i++) {
-            // 캐시에 있는 경우
             String currentCity = cities[i].toLowerCase();
             if (cache.contains(currentCity)) {
                 executionTime += 1;
@@ -20,7 +21,6 @@ class Solution {
     }
     
     public static void LRU(List<String> cache, int cacheSize, String city) {
-        if (cacheSize == 0) return;
         if (cache.size() < cacheSize) {
             cache.add(city);
         } else {
