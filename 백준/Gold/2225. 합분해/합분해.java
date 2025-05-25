@@ -11,10 +11,10 @@ public class Main {
         st = new StringTokenizer(br.readLine());
         n = Integer.parseInt(st.nextToken());
         k = Integer.parseInt(st.nextToken());
-
+        
+        // dp[k][n]은 i개의 숫자를 사용했을 때, n이 되는 경우의 수  
         long[][] dp = new long[k + 1][n + 1];
         dp[0][0] = 1;
-
         for (int i = 1; i <= k; i++) {
             long sum = 0;
             for (int j = 0; j <= n; j++) {
