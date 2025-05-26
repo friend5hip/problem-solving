@@ -58,7 +58,7 @@ public class Main {
             int curr = currNode.to;
             int currDist = currNode.w;
 
-            if (currDist < dist[curr]) continue;
+            if (currDist > dist[curr]) continue;
 
             for (Node neighbor : graph.get(curr)) {
                 int next = neighbor.to;
