@@ -4,19 +4,19 @@ import java.io.*;
 public class Main {
     static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     static StringTokenizer st;
-    static class Node implements Comparable<Node> {
+    static class Edge implements Comparable<Edge> {
         int to;
         int w;
-        public Node(int to, int w) {
+        public Edge(int to, int w) {
             this.to = to;
             this.w = w;
         }
         @Override
-        public int compareTo(Node o) {
+        public int compareTo(Edge o) {
             return Integer.compare(this.w, o.w);
         }
     }
-    static ArrayList<ArrayList<Node>> graph;
+    static ArrayList<ArrayList<Edge>> graph;
     static long[] dist;
     private static final int INF = Integer.MAX_VALUE;
 
@@ -33,7 +33,7 @@ public class Main {
             int from = Integer.parseInt(st.nextToken());
             int to = Integer.parseInt(st.nextToken());
             int w = Integer.parseInt(st.nextToken());
-            graph.get(from).add(new Node(to, w));
+            graph.get(from).add(new Edge(to, w));
         }
 
         st = new StringTokenizer(br.readLine());
@@ -50,23 +50,23 @@ public class Main {
         Arrays.fill(dist, INF);
         dist[startV] = 0;
 
-        PriorityQueue<Node> pq = new PriorityQueue<>();
-        pq.add(new Node(startV, 0));
+        PriorityQueue<Edge> pq = new PriorityQueue<>();
+        pq.add(new Edge(startV, 0));
 
         while (!pq.isEmpty()) {
-            Node currNode = pq.poll();
-            int curr = currNode.to;
-            int currDist = currNode.w;
+            Edge curr = pq.poll();
+            int currV = curr.to;
+            int currDist = curr.w;
 
-            if (currDist > dist[curr]) continue;
+            if (currDist > dist[currV]) continue;
 
-            for (Node neighbor : graph.get(curr)) {
+            for (Edge neighbor : graph.get(currV)) {
                 int next = neighbor.to;
                 int nextDist = currDist + neighbor.w;
 
                 if (nextDist < dist[next]) {
                     dist[next] = nextDist;
-                    pq.add(new Node(next, nextDist));
+                    pq.add(new Edge(next, nextDist));
                 }
             }
         }
