@@ -5,8 +5,8 @@ class Solution {
         // 인덱스 초기화
         List<String> dictionary = new ArrayList<>();
         dictionary.add("");
-        for (char c = 'A'; c <= 'Z'; c++) {
-            dictionary.add(String.valueOf(c));
+        for (int i = 0; i < 26; i++) {
+            dictionary.add(String.valueOf((char) ('A' + i)));
         }
         
         List<Integer> index = new ArrayList<>();
