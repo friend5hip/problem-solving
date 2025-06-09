@@ -32,6 +32,7 @@ public class Main {
                 if (map[i][j] == -1) airPurifier.add(new int[]{i, j});
             }
         }
+
         // T초가 지난 후에 남은 미세먼지 양을 구한다.
         while (t-- > 0) {
             // 미세먼지가 이동한다.
@@ -75,6 +76,7 @@ public class Main {
                         temp[nr][nc] += (int) Math.floor(map[i][j] / 5);
                         diffusionCount++;
                     }
+
                     // 기존의 미세먼지 칸은 map[r][c] - floor(map[r][c] / 5) * 확산된 방향의 개수가 됨
                     temp[i][j] -= ((int) Math.floor(map[i][j] / 5)) * diffusionCount;
                 }
@@ -85,49 +87,34 @@ public class Main {
     }
 
     static void activateAirPurifier() {
-        int[] upperPart = airPurifier.get(0);
-        int[] lowerPart = airPurifier.get(1);
-
-        counterclockwise(upperPart[0]); // 공기 청정기의 윗 부분은 반시계 방향 순환
-        clockwise(lowerPart[0]); // 공기 청정기의 아랫 부분은 시계 방향 순화
+        counterclockwise(); // 공기 청정기의 윗 부분은 반시계 방향 순환
+        clockwise(); // 공기 청정기의 아랫 부분은 시계 방향 순환
     }
 
-    static void counterclockwise(int row) {
-        List<int[]> path = new ArrayList<>(); // 순환 경로를 추적
-        for (int j = 1; j < c; j++) path.add(new int[]{row, j}); // 오른쪽으로 (공기 청정기 ~ c)
-        for (int j = row - 1; j >= 0; j--) path.add(new int[]{j, c - 1}); // 위쪽으로 (row - 1 ~ 0)
-        for (int j = c - 2; j > 0; j--) path.add(new int[]{0, j}); // 왼쪽으로 (c - 2 ~ 0)
-        for (int j = 0; j <= row; j++) path.add(new int[]{j, 0}); // 아래쪽으로 (0 ~ 공기 청정기)
-
-        // 먼지를 이동시킨다.
-        for (int j = path.size() - 1; j > 0; j--) {
-            int[] cur = path.get(j); int[] prev = path.get(j - 1);
-            if (map[cur[0]][cur[1]] == -1) continue; // 공기 청정기는 건드리지 않는다.
-            map[cur[0]][cur[1]] = map[prev[0]][prev[1]];
-        }
-
-        // 공기 청정기 오른쪽은 먼지를 제거한다.
-        int[] first = path.get(0);
-        map[first[0]][first[1]] = 0;
+    static void counterclockwise() {
+        int purifier = airPurifier.get(0)[0];
+        int top = 0;
+        int bottom = purifier;
+        int left = 0;
+        int right = c - 1;
+        for (int i = bottom - 1; i > top; i--) map[i][left] = map[i - 1][left]; // 왼쪽 열
+        for (int i = left; i < right; i++) map[top][i] = map[top][i + 1]; // 위 행
+        for (int i = top; i < bottom; i++) map[i][right] = map[i + 1][right]; // 오른쪽 열
+        for (int i = right; i > left; i--) map[bottom][i] = map[bottom][i - 1]; // 아래 행
+        map[bottom][left + 1] = 0;
     }
 
-    static void clockwise(int row) {
-        List<int[]> path = new ArrayList<>(); // 순환 경로를 추적
-        for (int j = 1; j < c; j++) path.add(new int[]{row, j}); // 오른쪽으로 (공기 청정기 ~ c - 1)
-        for (int j = row + 1; j < r; j++) path.add(new int[]{j, c - 1}); // 아래쪽으로 (row + 1 ~ r - 1)
-        for (int j = c - 2; j >= 0; j--) path.add(new int[]{r - 1, j}); // 왼쪽으로 (c - 2 ~ 0)
-        for (int j = r - 2; j >= row; j--) path.add(new int[]{j, 0}); // 위쪽으로 (0 ~ 공기 청정기)
-
-        // 먼지를 이동시킨다.
-        for (int j = path.size() - 1; j > 0; j--) {
-            int[] cur = path.get(j); int[] prev = path.get(j - 1);
-            if (map[cur[0]][cur[1]] == -1) continue; // 공기 청정기는 건드리지 않는다.
-            map[cur[0]][cur[1]] = map[prev[0]][prev[1]];
-        }
-
-        // 공기 청정기 오른쪽은 먼지를 제거한다.
-        int[] first = path.get(0);
-        map[first[0]][first[1]] = 0;
+    static void clockwise() {
+        int purifier = airPurifier.get(1)[0];
+        int top = purifier;
+        int bottom = r - 1;
+        int left = 0;
+        int right = c - 1;
+        for (int i = top + 1; i < bottom; i++) map[i][left] = map[i + 1][left]; // 왼쪽 열
+        for (int i = left; i < right; i++) map[bottom][i] = map[bottom][i + 1]; // 아래 행
+        for (int i = bottom; i > top; i--) map[i][right] = map[i - 1][right]; // 오른쪽 열
+        for (int i = right; i > left; i--) map[top][i] = map[top][i - 1]; // 위 행
+        map[top][left + 1] = 0;
     }
 
     static boolean inRange(int x, int y) {
