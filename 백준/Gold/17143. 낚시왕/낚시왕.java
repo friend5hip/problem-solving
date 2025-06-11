@@ -37,7 +37,6 @@ public class Main {
             int d = Integer.parseInt(st.nextToken()); // 방향
             int z = Integer.parseInt(st.nextToken()); // 크기
             map[r][c] = new Shark(s, d, z);
-
         }
 
         // c초 동안
@@ -68,7 +67,7 @@ public class Main {
             for (int j = 0; j < c; j++){
                 if (map[i][j] != null) {
                     Shark current = map[i][j];
-                    int[] next = getNext(i, j, current.s, current.d);
+                    int[] next = getNextLoc(i, j, current.s, current.d, r, c);
                     int nr = next[0], nc = next[1], nd = next[2];
                     // 빈 칸 혹은 더 큰 경우 이동해서 잡아먹음
                     if (currentMap[nr][nc] == null || currentMap[nr][nc].z < current.z) {
@@ -81,33 +80,38 @@ public class Main {
         map = currentMap;
     }
 
-    static int[] getNext(int cr, int cc, int s, int d) {
-        if (d == UP || d == DOWN) {
-            s %= (2 * (r - 1));
-        } else {
-            s %= (2 * (c - 1));
-        }
+    public static int[] getNextLoc(int i, int j, int speed, int dir, int R, int C) {
+        int ni = i, nj = j, ndir = dir;
 
-        for (int i = 0; i < s; i++) {
-            int nr = cr + dx[d];
-            int nc = cc + dy[d];
-            // 경계를 만나면 방향 전환
-            if (nr < 0 || nr >= r || nc < 0 || nc >= c) {
-                switch (d) {
-                    case UP: d = DOWN; break;
-                    case DOWN: d = UP; break;
-                    case LEFT: d = RIGHT; break;
-                    case RIGHT: d = LEFT; break;
-                }
+        if (dir == UP || dir == DOWN) {
+            int cycle = 2 * (R - 1);
+            int pos = (dir == DOWN) ? i : (cycle - i); // 방향에 따라 반대쪽에서 시작
 
-                nr = cr + dx[d];
-                nc = cc + dy[d];
+            int newPos = (pos + speed) % cycle;
+
+            if (newPos < R) {
+                ni = newPos;
+                ndir = DOWN;
+            } else {
+                ni = cycle - newPos;
+                ndir = UP;
             }
-            
-            cr = nr;
-            cc = nc;
+
+        } else { // LEFT or RIGHT
+            int cycle = 2 * (C - 1);
+            int pos = (dir == RIGHT) ? j : (cycle - j);
+
+            int newPos = (pos + speed) % cycle;
+
+            if (newPos < C) {
+                nj = newPos;
+                ndir = RIGHT;
+            } else {
+                nj = cycle - newPos;
+                ndir = LEFT;
+            }
         }
-        
-        return new int[]{cr, cc, d};
+
+        return new int[]{ni, nj, ndir};
     }
 }
