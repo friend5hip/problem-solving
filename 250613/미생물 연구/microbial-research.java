@@ -12,7 +12,7 @@ public class Main {
     static class MicroInfo {
         int index, size;
         Set<Integer> adjacentSet;
-        public MicroInfo(int index, int size, Set<Integer> adjacentSet) {
+        MicroInfo(int index, int size, Set<Integer> adjacentSet) {
             this.index = index;
             this.size = size;
             this.adjacentSet = adjacentSet;
@@ -82,7 +82,7 @@ public class Main {
             for (int j = 0; j < n; j++) {
                 if (newMap[i][j] != 0) {
                     if (visited[i][j]) continue;
-                    MicroInfo info = bfs(i, j, newMap); // [인덱스, 영역의 크기]
+                    MicroInfo info = bfs(i, j, newMap);
                     if (info.index == newMap[i][j]) {
                         microMap.put(info.index, microMap.getOrDefault(info.index, 0) + 1);
                         if (microMap.get(info.index) > 1) {
@@ -118,25 +118,25 @@ public class Main {
             int id = info[0];
             List<int[]> shape = findOriginalPos(id);
 
-            int h = 0, w = 0;
+            int maxR = 0, maxC = 0;
             for (int[] p : shape) {
-                h = Math.max(h, p[0]);
-                w = Math.max(w, p[1]);
+                maxR = Math.max(maxR, p[0]);
+                maxC = Math.max(maxC, p[1]);
             }
 
             boolean placed = false;
-            for (int c = 0; c + w < n && !placed; c++) {
-                for (int r = 0; r + h < n; r++) {
-                    boolean ok = true;
+            for (int c = 0; c + maxC < n && !placed; c++) {
+                for (int r = 0; r + maxR < n; r++) {
+                    boolean isValid = true;
                     for (int[] p : shape) {
                         int nr = r + p[0];
                         int nc = c + p[1];
                         if (newMap[nr][nc] != 0) {
-                            ok = false;
+                            isValid = false;
                             break;
                         }
                     }
-                    if (!ok) continue;
+                    if (!isValid) continue;
 
                     for (int[] p : shape) {
                         newMap[r + p[0]][c + p[1]] = id;
@@ -163,7 +163,6 @@ public class Main {
         visited = new boolean[n][n];
 
         List<MicroInfo> infos = new ArrayList<>();
-        Set<String> pairSet = new HashSet<>();
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
                 if (!visited[i][j] && map[i][j] != 0) {
@@ -173,6 +172,7 @@ public class Main {
             }
         }
 
+        Set<String> pairSet = new HashSet<>();
         for (MicroInfo info : infos) {
             int a = info.index;
             for (int b : info.adjacentSet) {
@@ -243,7 +243,7 @@ public class Main {
     static List<int[]> findOriginalPos(int id) {
         List<int[]> abs = new ArrayList<>();
         Queue<int[]> q = new ArrayDeque<>();
-        boolean[][] localVisited = new boolean[n][n];
+        boolean[][] visited = new boolean[n][n];
 
         // 덩어리의 첫 칸 찾기
         outer:
@@ -251,7 +251,7 @@ public class Main {
             for (int c = 0; c < n; c++) {
                 if (map[r][c] == id) {
                     q.add(new int[]{r, c});
-                    localVisited[r][c] = true;
+                    visited[r][c] = true;
                     break outer;
                 }
             }
@@ -268,8 +268,8 @@ public class Main {
                 int nr = cur[0] + dx[d];
                 int nc = cur[1] + dy[d];
                 if (nr < 0 || nr >= n || nc < 0 || nc >= n) continue;
-                if (!localVisited[nr][nc] && map[nr][nc] == id) {
-                    localVisited[nr][nc] = true;
+                if (!visited[nr][nc] && map[nr][nc] == id) {
+                    visited[nr][nc] = true;
                     q.add(new int[]{nr, nc});
                 }
             }
