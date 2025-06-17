@@ -1,7 +1,5 @@
 function solution(n) {
-    var answer = 0;
-    for (let i = 1; i <= n; i++) {
-        if (n % i === 0) answer += i;
-    }
-    return answer;
+   return Array.from({ length: n }, (_, i) => i + 1)
+       .filter(i => n % i === 0)
+       .reduce((sum, i) => sum += i, 0);
 }
