@@ -1,36 +1,32 @@
 function solution(tickets) {
-    const answer = [];
     const visited = Array(tickets.length).fill(false);
+    let answer = [];
 
     tickets.sort((a, b) => {
-        if (a[0] === b[0]) {
-            return a[1].localeCompare(b[1]);
-        } else {
-            return a[0].localeCompare(b[0]);
-        }
+        if (a[0] === b[0]) return a[1].localeCompare(b[1]);
+        return a[0].localeCompare(b[0]);
     });
+    
+    console.log(tickets);
 
-    function dfs(path, count) {
-        if (count === tickets.length) {
-            answer.push([...path]);
-            return;
+    function dfs(current, path) {
+        if (path.length === tickets.length + 1) {
+            answer = path;
+            return true;
         }
 
         for (let i = 0; i < tickets.length; i++) {
             const [from, to] = tickets[i];
-            if (!visited[i] && path[path.length - 1] === from) {
+            if (!visited[i] && from === current) {
                 visited[i] = true;
-                path.push(to);
-                dfs(path, count + 1);
-                path.pop();
+                if (dfs(to, [...path, to])) return true;
                 visited[i] = false;
             }
         }
+
+        return false;
     }
 
-    dfs(["ICN"], 0);
-
-    // 사전순으로 가장 빠른 경로를 선택
-    answer.sort();
-    return answer[0];
+    dfs("ICN", ["ICN"]);
+    return answer;
 }
