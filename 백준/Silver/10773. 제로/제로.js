@@ -1,6 +1,5 @@
 const input = require("fs")
-    .readFileSync(process.platform === "linux" ? "/dev/stdin" : "./input.txt")
-    .toString()
+    .readFileSync(process.platform === "linux" ? "/dev/stdin" : "./input.txt", "utf-8")
     .trim()
     .split('\n')
     .map(Number);
