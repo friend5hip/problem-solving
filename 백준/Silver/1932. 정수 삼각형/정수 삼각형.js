@@ -1,10 +1,8 @@
-const input = require("fs")
+const [n, ...triangle] = require("fs")
     .readFileSync(process.platform === "linux" ? "/dev/stdin" : "input.txt", "utf8")
     .trim()
     .split("\n")
-
-const n = +input[0];
-const triangle = input.slice(1).map(line => line.split(" ").map(Number));
+    .map(line => line.split(" ").map(Number));
 
 for (let i = 1; i < n; i++) {
     for (let j = 0; j <= i; j++) {
