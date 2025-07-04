@@ -14,10 +14,12 @@ dp[3] = 4;
 
 for (let i = 4; i <= MAX_N; i++) {
     for (let j = 1; j <= 3; j++) {
-        dp[i] += dp[i - j] % 1000000009;
+        dp[i] += dp[i - j] % 1_000_000_009;
     }
 }
 
-for (let i = 0; i < T; i++) {
-    console.log(dp[n[i]] % 1000000009);
+const answer = [];
+for (const num of n) {
+    answer.push(dp[num] % 1_000_000_009);
 }
+console.log(answer.join("\n"));
