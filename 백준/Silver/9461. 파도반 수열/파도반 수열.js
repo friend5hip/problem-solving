@@ -11,11 +11,8 @@ const dp = Array(MAX_N + 1).fill(0);
 dp[1] = 1;
 dp[2] = 1;
 dp[3] = 1;
-dp[4] = 2;
-dp[5] = 2;
-dp[6] = 3;
 
-for (let i = 7; i <= MAX_N; i++) {
+for (let i = 4; i <= MAX_N; i++) {
     dp[i] = dp[i - 3] + dp[i - 2];
 }
 
