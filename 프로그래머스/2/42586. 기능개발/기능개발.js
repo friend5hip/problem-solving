@@ -6,6 +6,7 @@ function solution(progresses, speeds) {
     while (progQueue.length > 0) {
         // 개발 진행
         for (let i = 0; i < progQueue.length; i++) {
+            if (progQueue[i] >= 100) continue;
             progQueue[i] += speedQueue[i];
         }
         // 맨 앞 기능 개발 완료 체크
