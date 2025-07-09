@@ -15,7 +15,6 @@ function solution(genres, plays) {
     const sortedGenres = [...genreMap.entries()].sort((a, b) => b[1] - a[1]);
     
     const result = [];
-    
     for (const [genre] of sortedGenres) {
         const songs = songMap.get(genre);
         songs.sort((a, b) => {
