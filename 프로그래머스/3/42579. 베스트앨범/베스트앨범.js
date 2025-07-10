@@ -3,26 +3,25 @@ function solution(genres, plays) {
     const songMap = new Map();
     
     for (let i = 0; i < genres.length; i++) {
-        const genre = genres[i];
-        const play = plays[i];
+        genreMap.set(genres[i], (genreMap.get(genres[i]) || 0) + plays[i]);
         
-        genreMap.set(genre, (genreMap.get(genre) || 0) + play);
-       
-        if (!songMap.has(genre)) songMap.set(genre, []);
-        songMap.get(genre).push([i, play]);
+        if (!songMap.has(genres[i])) {
+            songMap.set(genres[i], [[i, plays[i]]]);
+        } else {
+            songMap.get(genres[i]).push([i, plays[i]]);
+        }
     }
     
-    const sortedGenres = [...genreMap.entries()].sort((a, b) => b[1] - a[1]);
+    const sortedGenres = [...genreMap].sort((a, b) => b[1] - a[1]);
     
-    const result = [];
+    const album = [];
     for (const [genre] of sortedGenres) {
-        const songs = songMap.get(genre);
-        songs.sort((a, b) => {
-            if (b[1] === a[1]) return a[0] - b[0];
+        const songs = [...songMap.get(genre)].sort((a, b) => {
+            if (a[1] === b[1]) return a[0] - b[0];
             return b[1] - a[1];
         })
-        result.push(...songs.slice(0, 2).map(song => song[0]));
+        album.push(songs.slice(0, 2).map(e => e[0]));
     }
     
-    return result;
+    return album.flat();
 }
