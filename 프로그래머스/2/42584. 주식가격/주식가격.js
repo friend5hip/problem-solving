@@ -3,16 +3,17 @@ function solution(prices) {
     const stack = [];
     
     for (let i = 0; i < prices.length; i++) {
-        while (stack.length > 0 && prices[i] < prices[stack[stack.length - 1]]) {
+        while (stack.length && prices[i] < prices[stack[stack.length - 1]]) {
             const decreased = stack.pop();
             answer[decreased] = i - decreased;
         }
+        
         stack.push(i);
     }
     
-    while (stack.length > 0) {
+    while (stack.length) {
         const neverDecreased = stack.pop();
-        answer[neverDecreased] = prices.length - neverDecreased - 1;
+        answer[neverDecreased] = prices.length - 1 - neverDecreased;
     }
     
     return answer;
