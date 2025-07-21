@@ -3,22 +3,25 @@ function solution(word) {
     let flag = false;
     const vowel = ["A", "E", "I", "O", "U"];
     
-    function dfs(current, vowel) {
+    function dfs(current) {
         if (current.join("") === word) {
             flag = true;
+            return;
         }
+
+        if (current.length === 5) return;
         
         for (let i = 0; i < 5; i++) {
             if (!flag && current.length < 5) {
                 current.push(vowel[i]);
-                dfs(current, vowel);
                 count++;
+                dfs(current);
                 current.pop();
             }
         }
     }
     
-    dfs([] , vowel, 1);
+    dfs([]);
     
     return count;
 }
