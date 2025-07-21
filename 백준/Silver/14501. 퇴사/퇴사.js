@@ -7,11 +7,10 @@ const n = +input[0];
 const council = input.slice(1).map(e => e.split(" ").map(Number));
 
 let max = 0;
-
 function dfs(day, profit) {
     if (day >= n) {
         max = Math.max(max, profit);
-        return;
+        return
     }
 
     const [t, p] = council[day];
