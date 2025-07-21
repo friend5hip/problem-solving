@@ -5,7 +5,6 @@ const input = require("fs")
 
 const [n, s] = input[0].split(" ").map(Number);
 const arr = input[1].split(" ").map(Number);
-const visited = Array(n).fill(false);
 
 let count = 0;
 function dfs(depth, current) {
