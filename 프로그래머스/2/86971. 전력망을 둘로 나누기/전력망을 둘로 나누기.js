@@ -1,7 +1,6 @@
 function solution(n, wires) {
     let min = Infinity;
-    let v1 = 0;
-    let v2 = 0;
+    let v1, v2 = 0;
     const adjacentList = Array.from({ length: n + 1 }, () => []);
     for (const [from, to] of wires) {
         adjacentList[from].push(to);
