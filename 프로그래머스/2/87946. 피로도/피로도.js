@@ -2,19 +2,19 @@ function solution(k, dungeons) {
     const visited = Array(dungeons.length).fill(false);
     let max = 0;
     
-    function dfs(k, dungeons, visited, count) {
+    function dfs(k, count) {
         max = Math.max(max, count);
 
         for (let i = 0; i < dungeons.length; i++) {
             if (!visited[i] && k >= dungeons[i][0]) {
                 visited[i] = true;
-                dfs(k - dungeons[i][1], dungeons, visited, count + 1);
+                dfs(k - dungeons[i][1], count + 1);
                 visited[i] = false;
             }
         }
     }
     
-    dfs(k, dungeons, visited, 0);
+    dfs(k, 0);
     return max;
 }
 
