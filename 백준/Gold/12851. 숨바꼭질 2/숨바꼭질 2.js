@@ -3,13 +3,6 @@ const input = require("fs")
     .trim()
     .split("\n");
 
-class Node {
-  constructor(value) {
-    this.value = value;
-    this.next = null;
-  }
-}
-
 const Queue = () => {
     const queue = [];
     let start = 0;
@@ -36,40 +29,37 @@ const Queue = () => {
 const [n, k] = input[0].split(" ").map(Number);
 
 let count = 0;
-let minTime = -1;
+let min = -1;
 
 bfs(n);
-console.log(minTime);
+console.log(min);
 console.log(count);
 
 function bfs(start) {
-    const visited = Array(100000).fill(false);
+    const visited = Array(100001).fill(-1);
     const q = Queue();
     q.add([start, 0]);
 
     while (q.length > 0) {
         const [current, currentTime] = q.poll();
-        visited[current] = true;
         
         if (current === k) {
-            if (minTime === -1) {
-                minTime = currentTime;
+            if (min === -1) {
+                min = currentTime;
                 count = 1;
-            } else if (currentTime === minTime) {
+            } else if (currentTime === min) {
                 count++;
             }
             continue;
         }
 
-        if (minTime !== -1 && currentTime > minTime) break;
+        if (min !== -1 && currentTime > min) break;
 
-        const moves = [current - 1, current + 1, current * 2];
-        for (const move of moves) {
-            const next = move;
-
+        for (const next of [current - 1, current + 1, current * 2]) {
             if (next < 0 || next > 100000) continue;
-            if (!visited[next]) {
+            if (visited[next] === -1 || visited[next] === currentTime + 1) {
                 q.add([next, currentTime + 1]);
+                visited[next] = currentTime + 1;
             }
         }
     }
