@@ -10,35 +10,27 @@ class Node {
   }
 }
 
-class Queue {
-  constructor() {
-    this.head = null;
-    this.tail = null;
-    this.size = 0;
-  }
+const Queue = () => {
+    const queue = [];
+    let start = 0;
+    let end = 0;
 
-  add(value) {
-    const newNode = new Node(value);
-    if (!this.head) {
-      this.head = newNode;
-      this.tail = newNode;
-    } else {
-      this.tail.next = newNode;
-      this.tail = newNode;
+    const add = (e) => {
+        queue.push(e);
+        end++;
     }
-    this.size++;
-  }
 
-  poll() {
-    if (!this.head) return null;
-    const removeNode = this.head;
-    this.head = this.head.next;
-    if (!this.head) {
-      this.tail = null;
+    const poll = () => {
+        return queue[start++];
     }
-    this.size--;
-    return removeNode.value;
-  }
+
+    return {
+            add, 
+            poll, 
+            get length() {
+                return end - start;
+            }
+    }
 }
 
 const [n, k] = input[0].split(" ").map(Number);
@@ -52,10 +44,10 @@ console.log(count);
 
 function bfs(start) {
     const visited = Array(100000).fill(false);
-    const q = new Queue();
+    const q = Queue();
     q.add([start, 0]);
 
-    while (q.size > 0) {
+    while (q.length > 0) {
         const [current, currentTime] = q.poll();
         visited[current] = true;
         
