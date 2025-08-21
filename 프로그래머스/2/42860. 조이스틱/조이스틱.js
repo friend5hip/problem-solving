@@ -1,29 +1,28 @@
 function solution(name) {
-    const n = name.length;
-    let foundA = false;
     let vertCount = 0;
-    let horiCount = n - 1;
+    let horCount = name.length - 1;
+    let foundA = false;
     
-    for (let i = 0; i < n; i++) {
-        const index = name[i].charCodeAt(0) - 65;
-        if (index === 0) {
-            foundA = true;
-            continue;
-        }
-        vertCount += Math.min(index, 26 - index);
+    // 세로 조작 횟수 계산
+    for (let i = 0; i < name.length; i++) {
+        if (name[i] === 'A') foundA = true;
+        const index = name[i].charCodeAt(0);
+        vertCount += Math.min(index - 'A'.charCodeAt(0), 'Z'.charCodeAt(0) - index + 1);
     }
     
+    // 가로 조작 횟수 계산
     if (foundA) {
-        for (let i = 0; i < n; i++) {
+        for (let i = 0; i < name.length; i++) {
             let nextIndex = i + 1;
-            while (nextIndex < n && name[nextIndex] === 'A') {
+            while (nextIndex < name.length && name[nextIndex] === 'A') {
                 nextIndex++;
             }
-            const left = i + 2 * (n - nextIndex);
-            const right = i * 2 + (n - nextIndex);
-            horiCount = Math.min(horiCount, left, right);
+            console.log(nextIndex);
+            const right = i * 2 + (name.length - nextIndex);
+            const left = i + 2 * (name.length - nextIndex);
+            horCount = Math.min(horCount, left, right);
         }
     }
-    
-    return vertCount + horiCount;
+
+    return vertCount + horCount;
 }
